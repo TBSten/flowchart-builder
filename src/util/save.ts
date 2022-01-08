@@ -25,13 +25,17 @@ export const useSaveBrowser = ()=>{
     } ;
     useEffect(()=>{
         //セーブデータのロード機能
+        if(!store.keys().includes(STORE_KEY)){
+            return ;
+        }
+        const loadData = JSON.parse(store.get(STORE_KEY)) ;
         const saveData = {
             items:{},
             meta:{
                 title:"",
                 flows:[],
+                ...loadData,
             },
-            ...JSON.parse(store(STORE_KEY)),
         } as const ;
         dispatch(loadItems({items:saveData.items}));
         dispatch(loadMeta({meta:saveData.meta}));
