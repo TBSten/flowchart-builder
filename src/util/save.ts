@@ -29,13 +29,14 @@ export const useSaveBrowser = ()=>{
             return ;
         }
         const loadData = JSON.parse(store.get(STORE_KEY)) ;
+        console.log("load",loadData);
         const saveData = {
             items:{},
             meta:{
                 title:"",
                 flows:[],
-                ...loadData,
             },
+            ...loadData,
         } as const ;
         dispatch(loadItems({items:saveData.items}));
         dispatch(loadMeta({meta:saveData.meta}));
